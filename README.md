@@ -1,19 +1,31 @@
-# Hello World App
+## Monitoring Setup (Classwork 1)
 
-## Steps Taken
+### New Branch
+This task was completed on the `monitoring` branch.
 
-### 1. Created the App
-Built a simple Node.js + Express app that returns "Hello World!" on port 3000.
+### Services Added
+The `docker-compose.yml` was updated to include the following monitoring services:
 
-### 2. Containerized with Docker
-Wrote a Dockerfile using `node:18-alpine` as the base image.
+- **Prometheus** (port 9090) — scrapes and stores metrics from the app and blackbox
+- **Blackbox Exporter** (port 9115) — probes the Hello World app endpoint to check availability
+- **Grafana** (port 3001) — visualizes metrics from Prometheus via dashboards
 
-### 3. CI/CD Pipeline
-Set up a GitHub Actions workflow that automatically builds and pushes the Docker image to Docker Hub on every push to main.
+### Running Containers
+All five containers running together:
 
-## Docker Hub
-🔗 https://hub.docker.com/r/cynthiailojeme/hello-world-app
+| Container | Port | Purpose |
+|---|---|---|
+| app | 3000 | Hello World Express app |
+| prometheus | 9090 | Metrics collection |
+| blackbox | 9115 | Endpoint health probing |
+| grafana | 3001 | Metrics visualization |
 
-## Screenshots
-![Pipeline Success](./screenshots/pipeline.png)
-![Docker Hub](./screenshots/dockerhub.png)
+### How to Run
+```bash
+docker-compose up --build
+```
+
+### Screenshots
+![Running Containers](./screenshots/containers.png)
+![Prometheus](./screenshots/prometheus.png)
+![Grafana](./screenshots/grafana.png)
